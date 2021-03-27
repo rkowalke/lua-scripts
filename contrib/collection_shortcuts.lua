@@ -18,8 +18,66 @@
 
 --[[About this plugin
 This plugin adds the possibility to assign shortcuts(s) in the preferences
-to color labels. The shortcut will either add a new color label filter or
-update the topmost color label filter in the collection module.
+to apply a collection filter rule a for color label.
+The shortcut will either add a new color label filter or
+update the last color label filter in the collection module.
+
+I recommend to set keyboard shortcuts analogous to the ones that set the color label
+to the image metadata:
+  - `red filter` Shift + F1
+  - `yellow filter` Shift + F2
+  - `green filter` Shift + F3
+  - `blue filter` Shift + F4
+  - `purple filter` Shift + F5
+  - `clear filter` Shift + F6
+
+this will speed up workflows that are based on color labels.
+the idea behind is that a user will mark each step in
+his workflow with a dedicated color label.
+
+between each step, the user needs to add/update a filter
+rule in the `collect images` module, mainly to reduce
+the number of images for the next - more complex - step.
+
+the shortcut functions will search in the actual filter
+set for an existing rule for `color label`:
+  - if one is found, its value will be updated according
+     to the shortcut.
+  - if more than one color label rule is present, it will
+    update the last one.
+  - otherwise a new rule will be added and connected by 
+    logical `AND` to the last rule. 
+
+the `clear` shortcut will remove any `color label` rule(s).
+
+an example workflow - starting from selecting a collection
+in the `collect images` module:
+
+  - quality culling
+    use culling mode for initial quality control (reject/keep, rough star ratings).
+    mark images with `red color label`
+
+  - series culling / review in darkroom
+    basic adjustments for side-by-side comparisons as needed (i.e. exposure).
+    some images may be not sharp enough or should be rejected by other reasons.
+    the goal is to select a small subset of images from shooting series.
+    mark images with `yellow color label`
+
+  - basic image processing
+    apply basic adjustments to your taste, such that the
+    result is good enough for external selection/reviewing.
+    mark images with `green color label`
+
+  - color grading and retouch
+    adjust contrast, color calibration and balance, local contrast,
+    denoising, retouch etc.
+    all artistic processing to make the image more beautiful.
+    only a small subset of all collection images should enter this step.
+    mark images with `blue color label`
+
+  - final review, tagging and export
+    edit image metadata, tagging and export
+    mark images with `purple color label`
 
 ----REQUIRED SOFTWARE----
 NA
